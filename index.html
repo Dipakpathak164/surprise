@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Only For Pii 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Demo styles -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #140016, #2c0033, #3d0047);
+            color: #f8e9f0;
+            overflow-x: hidden;
+        }
+
+        .swiper {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 300px;
+            height: 300px;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+        }
+
+        /* GENERAL SECTIONS */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 25px;
+        }
+
+        h1,
+        h2 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        /* BUTTON */
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #f7c6d9, #d48bb3);
+            color: #2a002e;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* INPUT */
+        input {
+            padding: 12px;
+            border-radius: 30px;
+            border: none;
+            margin-top: 20px;
+            width: 220px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+        }
+
+        /* HERO */
+        .hero {
+            background: radial-gradient(circle at top, #4b0d57 0%, #140016 70%);
+        }
+
+        .hero-content {
+            max-width: 420px;
+            animation: fadeUp 1.5s ease forwards;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .hero-text {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* GLASS IMAGE CARD */
+        .image-frame {
+            width: 100%;
+            height: 260px;
+            border-radius: 30px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+
+        .image-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        /* UNLOCK SCREEN */
+        #unlockScreen {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, #5c1a5f, #140016);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.6s;
+        }
+
+        #unlockScreen.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .bigHeart {
+            font-size: 100px;
+            animation: pulse 1s infinite;
+        }
+
+        /* GALLERY */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            transition: 0.4s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        /* LETTER CARDS */
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            padding: 18px;
+            border-radius: 20px;
+            margin: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 280px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ANIMATIONS */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-150px) scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-350px) scale(0.8);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <audio autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    <!-- DATE GATE -->
+    <section id="gate">
+        <h1>Private Love Portal 💖</h1>
+        <p>Only Pii can unlock this world...</p>
+        <p style="margin-top:15px;">
+            Hint: The day Dii’s life changed forever 🌸<br>
+            Format: DD-MM-YYYY
+        </p>
+
+        <input type="text" id="dateInput" placeholder="DD-MM-YYYY">
+        <br>
+        <button onclick="checkDate()">Unlock</button>
+        <p id="errorMsg" style="margin-top:15px;"></p>
+    </section>
+
+    <!-- UNLOCK ANIMATION -->
+    <div id="unlockScreen">
+        <div class="bigHeart">💖</div>
+        <p style="margin-top:20px;">Welcome Pii...</p>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="mainContent" class="hidden">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Pii 💕</h1>
+                <p class="hero-text">
+                    01 November 2024... <br>
+                    The day my ordinary life turned extraordinary. <br><br>
+                    14 months later...
+                    I still fall for you.
+                </p>
+
+                <div class="image-frame">
+                    <img src="we.jpeg" alt="Us">
+                </div>
+
+                <button onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">
+                    Continue Our Story
+                </button>
+
+            </div>
+        </section>
+
+        <section id="story">
+            <h2>Our Filmy Journey 💞</h2>
+            <p style="max-width:420px;margin-top:20px;">
+                From random talks...
+                to being each other's peace.
+                From laughter... to drama 😌
+                Every moment with you feels cinematic.
+
+                And Pii...
+                I would choose you in every lifetime.
+            </p>
+        </section>
+        <section>
+            <h2>Open When... 💌</h2>
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <div class="card" onclick="openLetter(1)">When you're sad</div>
+                <div class="card" onclick="openLetter(2)">When you miss Dii</div>
+                <div class="card" onclick="openLetter(3)">When you doubt yourself</div>
+            </div>
+            <p id="letterText" style="margin-top:25px;max-width:420px;"></p>
+        </section>
+
+        <section>
+            <h2>One Last Thing 🌠</h2>
+            <p style="max-width:420px;margin-top:20px;">
+                14 months down...
+                A lifetime to go.
+
+                I love you endlessly, Pii 💖
+                — Dii
+            </p>
+            <button onclick="launchHearts()">Tap Here ❤️</button>
+        </section>
+
+    </div>
+    <div id="memories" class="memories-section">
+        <h2>Our Memories 🌸</h2>
+
+        <!-- Swiper -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <script>
+        const correctDate = "01-11-2024";
+
+        const memories = document.getElementById("memories");
+
+        // Initial hidden state
+        memories.style.opacity = "0";
+        memories.style.maxHeight = "0";
+        memories.style.overflow = "hidden";
+        memories.style.transition = "all 0.8s ease";
+
+        function checkDate() {
+            let input = document.getElementById("dateInput").value;
+
+            if (input === correctDate) {
+
+                document.getElementById("gate").style.display = "none";
+
+                let unlock = document.getElementById("unlockScreen");
+                unlock.classList.add("show");
+
+                setTimeout(() => {
+                    unlock.style.display = "none";
+
+                    // Show top content
+                    document.getElementById("mainContent").classList.remove("hidden");
+
+                    // Smooth reveal of memories section
+                    memories.style.opacity = "1";
+                    memories.style.height = '100vh',
+                        memories.style.display = 'flex',
+                        memories.style.alignItems = 'center',
+                        memories.style.flexDirection = 'column',
+                        memories.style.justifyContent = 'center',
+                        memories.style.maxHeight = "2000px"; // large enough to expand fully
+
+                }, 2500);
+
+            } else {
+                document.getElementById("errorMsg").innerText =
+                    "That’s not our magical day Pii 😌";
+            }
+        }
+
+
+
+        function openLetter(num) {
+            const messages = [
+                "",
+                "Pii… even on your worst days, you are the brightest part of my world.",
+                "When you miss Dii, just remember my heart beats with yours.",
+                "You are stronger and more magical than you think. Never doubt that."
+            ];
+            document.getElementById("letterText").innerText = messages[num];
+        }
+
+        function launchHearts() {
+
+            // Smooth scroll to memories section
+            document.getElementById("memories").scrollIntoView({
+                behavior: "smooth"
+            });
+
+            for (let i = 0; i < 40; i++) {
+
+                let heart = document.createElement("div");
+                heart.innerHTML = "💖";
+
+                heart.style.position = "fixed";
+                heart.style.left = Math.random() * 100 + "%";
+                heart.style.bottom = "-20px";
+
+                // Bigger size (random between 30px and 60px)
+                heart.style.fontSize = (30 + Math.random() * 30) + "px";
+
+                heart.style.pointerEvents = "none";
+                heart.style.zIndex = "9999";
+
+                // Custom float animation
+                heart.style.animation = "floatUp 2.5s ease-out forwards";
+
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 2500);
+            }
+        }
+
+    </script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            loop: true, // IMPORTANT for smooth continuous autoplay
+            autoplay: {
+                delay: 2500, // time between slides (ms)
+                disableOnInteraction: false, // keeps autoplay running after swipe
+            },
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+            },
+        });
+
+    </script>
+</body>
+
+</html>
