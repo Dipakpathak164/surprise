@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap"
         rel="stylesheet">
@@ -124,7 +127,6 @@
         /* GLASS IMAGE CARD */
         .image-frame {
             width: 100%;
-            height: 260px;
             border-radius: 30px;
             overflow: hidden;
             margin-bottom: 25px;
@@ -258,6 +260,37 @@
                 opacity: 0;
             }
         }
+
+        .shake {
+            animation: shake 0.4s;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-6px);
+            }
+
+            50% {
+                transform: translateX(6px);
+            }
+
+            75% {
+                transform: translateX(-6px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 
@@ -342,7 +375,21 @@
                 I love you endlessly, Pii 💖
                 — Dii
             </p>
-            <button onclick="launchHearts()">Tap Here ❤️</button>
+            <p style="margin-top:25px;">
+                Enter Our First Temple Visit Date 🛕
+            </p>
+
+            <input type="text" id="templeInput" placeholder="Select Date">
+
+            <br>
+
+            <button id="templeBtn" onclick="checkTemple()" disabled>
+                Unlock Our Memories 💖
+            </button>
+
+            <p id="templeError" style="margin-top:10px; opacity:0; transition:0.3s;"></p>
+
+
         </section>
 
     </div>
@@ -388,7 +435,6 @@
 
         const memories = document.getElementById("memories");
 
-        // Initial hidden state
         memories.style.opacity = "0";
         memories.style.maxHeight = "0";
         memories.style.overflow = "hidden";
@@ -406,19 +452,7 @@
 
                 setTimeout(() => {
                     unlock.style.display = "none";
-
-                    // Show top content
                     document.getElementById("mainContent").classList.remove("hidden");
-
-                    // Smooth reveal of memories section
-                    memories.style.opacity = "1";
-                    memories.style.height = '100vh',
-                        memories.style.display = 'flex',
-                        memories.style.alignItems = 'center',
-                        memories.style.flexDirection = 'column',
-                        memories.style.justifyContent = 'center',
-                        memories.style.maxHeight = "2000px"; // large enough to expand fully
-
                 }, 2500);
 
             } else {
@@ -427,6 +461,61 @@
             }
         }
 
+
+        const correctTempleDate = "2024-12-15"; // YYYY-MM-DD format
+        const templeInput = document.getElementById("templeInput");
+        const templeBtn = document.getElementById("templeBtn");
+        const templeError = document.getElementById("templeError");
+        templeInput.addEventListener("input", function () {
+            templeBtn.disabled = !this.value;
+        });
+
+        flatpickr("#templeInput", {
+            dateFormat: "Y-m-d",
+            maxDate: "today",
+            disableMobile: true,
+            animate: true,
+        });
+
+
+        function checkTemple() {
+
+            if (templeInput.value === correctTempleDate) {
+
+                templeError.style.opacity = "0";
+
+                // Small cinematic delay
+                templeBtn.innerText = "Unlocking...";
+                templeBtn.disabled = true;
+
+                setTimeout(() => {
+
+                    memories.style.opacity = "1";
+                    memories.style.maxHeight = "2000px";
+
+                    memories.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                    launchHearts();
+
+                    templeBtn.innerText = "Unlocked 💖";
+
+                }, 800);
+
+            } else {
+
+                templeError.innerText = "Hmm… try remembering that day again 😌";
+                templeError.style.opacity = "1";
+
+                // Shake effect
+                templeInput.classList.add("shake");
+
+                setTimeout(() => {
+                    templeInput.classList.remove("shake");
+                }, 400);
+            }
+        }
 
 
         function openLetter(num) {
@@ -441,11 +530,6 @@
 
         function launchHearts() {
 
-            // Smooth scroll to memories section
-            document.getElementById("memories").scrollIntoView({
-                behavior: "smooth"
-            });
-
             for (let i = 0; i < 40; i++) {
 
                 let heart = document.createElement("div");
@@ -454,14 +538,9 @@
                 heart.style.position = "fixed";
                 heart.style.left = Math.random() * 100 + "%";
                 heart.style.bottom = "-20px";
-
-                // Bigger size (random between 30px and 60px)
                 heart.style.fontSize = (30 + Math.random() * 30) + "px";
-
                 heart.style.pointerEvents = "none";
                 heart.style.zIndex = "9999";
-
-                // Custom float animation
                 heart.style.animation = "floatUp 2.5s ease-out forwards";
 
                 document.body.appendChild(heart);
@@ -469,6 +548,7 @@
                 setTimeout(() => heart.remove(), 2500);
             }
         }
+
 
     </script>
     <!-- Swiper JS -->
