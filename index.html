@@ -5,10 +5,17 @@
     <meta charset="utf-8" />
     <title>Only For Pii 💖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap"
@@ -29,11 +36,20 @@
             height: 100%;
         }
 
+        :root {
+            --bg-gradient: linear-gradient(135deg, #ffd1e8, #ffb3d9, #ff99cc);
+            --text-color: #7a004f;
+            --card-bg: rgba(255, 255, 255, 0.25);
+            --card-text: #5a003f;
+            --card-shadow: rgba(0, 0, 0, 0.15);
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ffd1e8, #ffb3d9, #ff99cc);
-            color: #7a004f;
+            background: var(--bg-gradient);
+            color: var(--text-color);
             overflow-x: hidden;
+            transition: background 0.6s ease, color 0.6s ease;
         }
 
         section {
@@ -105,6 +121,8 @@
             outline: none;
             transition: 0.3s ease;
             text-align: center;
+            margin-top: 16px;
+            display: inline-block;
         }
 
         input:focus {
@@ -334,8 +352,16 @@
             align-items: center;
         }
 
+        .card,
+        .love-card,
+        .letter-box,
+        .memories-section {
+            background: var(--card-bg);
+            transition: 0.6s ease;
+        }
+
         .card {
-            background: rgba(255, 255, 255, 0.15);
+            /* background: rgba(255, 255, 255, 0.15); */
             backdrop-filter: blur(10px);
             padding: 18px;
             border-radius: 20px;
@@ -345,8 +371,8 @@
             width: 280px;
             text-align: center;
             font-weight: 500;
-            color: #5a003f;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            color: var(--card-text);
+            box-shadow: 0 8px 25px var(--card-shadow);
         }
 
         /* Hover */
@@ -643,26 +669,192 @@
         }
 
         .memories-section {
-            height: 100vh;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.8s ease;
+
+        }
+
+        .memories-section.show {
+            opacity: 1;
+            max-height: 2000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .glow-love {
+            display: inline-block;
+            animation: glowLove 2s ease-in-out infinite;
+        }
+
+        @keyframes glowLove {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 0px rgba(255, 105, 180, 0.4));
+            }
+
+            50% {
+                transform: scale(1.5);
+                filter: drop-shadow(0 0 12px rgba(255, 105, 180, 0.8));
+            }
+        }
+
+        .swiper-slide-shadow-left,
+        .swiper-slide-shadow-right {
+            background-image: 100%;
+        }
+
+        .point-down {
+            display: inline-block;
+            font-size: 40px;
+            animation: smoothDown 2s ease-in-out infinite;
+        }
+
+        @keyframes smoothDown {
+            0% {
+                transform: translateY(0);
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: translateY(12px);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 0.9;
+            }
+        }
+
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(135deg, #ff9acb, #ff6fb5);
+            color: white;
+            font-size: 22px;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            /* 🔥 Hidden state */
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: scale(0.8);
+
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Optional subtle pulse */
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            animation: pulseMusic 2s infinite ease-in-out;
+        }
+
+        .music-btn.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+
+
+        @keyframes pulseMusic {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            display: flex;
+            gap: 12px;
+            z-index: 9999;
+        }
+
+        .theme-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-dot:hover {
+            transform: scale(1.2);
+        }
+
+        /* Colors */
+        .theme-dot.light {
+            background: #ffb3d9;
+        }
+
+        .theme-dot.medium {
+            background: #ff69b4;
+        }
+
+        .theme-dot.dark {
+            background: #8b004f;
+        }
+
+        /* Active state */
+        .theme-dot.active {
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
     </style>
 </head>
 
 <body>
-    <audio autoplay loop>
-        <source src="Agoli-Anubhabe-RUDRA-Zubeen-Garg-Bhaswati-Bharati-Ravi-Sarma-Nandinee-Diganta-Bharati.mp3"
-            type="audio/mpeg">
-    </audio>
+    <div class="theme-switcher">
+        <span class="theme-dot light active" data-theme="light"></span>
+        <span class="theme-dot medium" data-theme="medium"></span>
+        <span class="theme-dot dark" data-theme="dark"></span>
+    </div>
+
     <!-- DATE GATE -->
     <section id="gate" class="position-relative">
         <img src="./assets/rightflower-removebg-preview.png" alt="flower" class="right_flower">
         <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
-        <h1>Private Love Portal 💖</h1>
+        <h1>Private Love Portal <span class="glow-love">💖</span></h1>
         <p>Only Pii can unlock this world...</p>
         <p style="margin-top:15px;">
             The day Dii’s life changed forever 🌸<br>
         </p>
-        <span style="font-size: 40px;">👇</span>
+        <span class="point-down">👇</span>
         <input type="text" id="dateInput" placeholder="Select Date 🗓️">
         <br>
         <button id="unlockBtn" onclick="checkDate()">Unlock <span class="heart">💖</span></button>
@@ -673,21 +865,20 @@
     <!-- UNLOCK ANIMATION -->
     <div id="unlockScreen">
         <div class="bigHeart">💖</div>
-        <p style="margin-top:20px;color: #f2f2f2;">Welcome Pii...<span class="heart">💖</span></p>
+        <p style="margin-top:20px;color: #f2f2f2;">Welcome Pii...<span class="heart glow-love">💖</span></p>
     </div>
 
     <!-- MAIN CONTENT -->
-    <div id="mainContent">
-        <!-- <div id="mainContent" class="hidden"> -->
+    <div id="mainContent" class="hidden">
 
         <!-- HERO -->
         <section class="hero">
             <div class="hero-content color-white">
-                <h1 class="hero-title color-white">Pii 💕</h1>
+                <h1 class="hero-title color-white">Pii <span class="glow-love">💕</span></h1>
                 <p class="hero-text color-white">
                     01 November 2024... <br>
-                    The day my ordinary life turned extraordinary. <br><br>
-                    14 months later...
+                    The day my ordinary life turned extraordinary. <br>
+                    <span class="monthsTogether"></span> months later...💞"<br>
                     I still fall for you.
                 </p>
                 <div class="image-frame">
@@ -714,7 +905,7 @@
 
         <section id="story" class="position-relative">
             <div class="love-card">
-                <h2>Our Filmy Journey 💞</h2>
+                <h2>Our Filmy Journey <span class="glow-love">💞</span></h2>
                 <p style="max-width:420px;margin-top:20px;">
                     From random talks...
                     to being each other's peace.
@@ -729,7 +920,7 @@
         <section class="position-relative">
             <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
             <img src="./assets/rightflower-removebg-preview.png" alt="flower" class="right_flower">
-            <h2>Open When... 💌</h2>
+            <h2>Open When... <span class="glow-love">💌</span></h2>
             <div class="letters-container">
 
                 <div class="card" onclick="openLetter(1, this)">
@@ -755,9 +946,9 @@
 
         <section class="position-relative">
             <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
-            <h2>One Last Thing 🌠</h2>
+            <h2>One Last Thing <span class="glow-love">🌠</span></h2>
             <p style="max-width:420px;margin-top:20px;">
-                14 months down...
+                <span class="monthsTogether"></span> months down...
                 A lifetime to go.
 
                 I love you endlessly, Pii 💖
@@ -766,7 +957,8 @@
             <p style="margin-top:25px;">
                 Enter Our First Temple Visit Date 🛕
             </p>
-            <span style="font-size: 40px;">👇</span>
+            <span class="point-down">👇</span>
+
 
             <input type="text" id="templeInput" placeholder="Select Date 🗓️">
 
@@ -783,38 +975,155 @@
 
     </div>
     <div id="memories" class="memories-section">
-        <h2>Our Memories 🌸</h2>
+        <h2>Our Memories <span class="glow-love">🌸</span></h2>
 
         <!-- Swiper -->
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                    <a href="./assets/openletter1.jpeg" class="glightbox">
+                        <img src="./assets/openletter1.jpeg" />
+                    </a>
                 </div>
+
                 <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                    <a href="./assets/openletter3.jpeg" class="glightbox">
+                        <img src="./assets/openletter3.jpeg" />
+                    </a>
                 </div>
+
                 <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                    <a href="./assets/openletter2.jpeg" class="glightbox">
+                        <img src="./assets/openletter2.jpeg" />
+                    </a>
                 </div>
+
                 <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                    <a href="./assets/openletter4.jpeg" class="glightbox">
+                        <img src="./assets/openletter4.jpeg" />
+                    </a>
                 </div>
+
                 <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                    <a href="./assets/1.jpeg" class="glightbox">
+                        <img src="./assets/1.jpeg" />
+                    </a>
                 </div>
+
                 <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                    <a href="./assets/2.jpeg" class="glightbox">
+                        <img src="./assets/2.jpeg" />
+                    </a>
                 </div>
+
                 <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                    <a href="./assets/3.jpeg" class="glightbox">
+                        <img src="./assets/3.jpeg" />
+                    </a>
                 </div>
+
                 <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                    <a href="./assets/4.jpeg" class="glightbox">
+                        <img src="./assets/4.jpeg" />
+                    </a>
                 </div>
+
                 <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                    <a href="./assets/5.jpeg" class="glightbox">
+                        <img src="./assets/5.jpeg" />
+                    </a>
                 </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/6.jpeg" class="glightbox">
+                        <img src="./assets/6.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/7.jpeg" class="glightbox">
+                        <img src="./assets/7.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/8.jpeg" class="glightbox">
+                        <img src="./assets/8.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/9.jpeg" class="glightbox">
+                        <img src="./assets/9.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/10.jpeg" class="glightbox">
+                        <img src="./assets/10.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/11.jpeg" class="glightbox">
+                        <img src="./assets/11.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/12.jpeg" class="glightbox">
+                        <img src="./assets/12.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/13.jpeg" class="glightbox">
+                        <img src="./assets/13.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/14.jpeg" class="glightbox">
+                        <img src="./assets/14.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/15.jpeg" class="glightbox">
+                        <img src="./assets/15.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/16.jpeg" class="glightbox">
+                        <img src="./assets/16.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/17.jpeg" class="glightbox">
+                        <img src="./assets/17.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/18.jpeg" class="glightbox">
+                        <img src="./assets/18.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/19.jpeg" class="glightbox">
+                        <img src="./assets/19.jpeg" />
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                    <a href="./assets/20.jpeg" class="glightbox">
+                        <img src="./assets/20.jpeg" />
+                    </a>
+                </div>
+
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -824,10 +1133,10 @@
 
         const memories = document.getElementById("memories");
 
-        memories.style.opacity = "0";
-        memories.style.maxHeight = "0";
-        memories.style.overflow = "hidden";
-        memories.style.transition = "all 0.8s ease";
+        // memories.style.opacity = "0";
+        // memories.style.maxHeight = "0";
+        // memories.style.overflow = "hidden";
+        // memories.style.transition = "all 0.8s ease";
 
         function checkDate() {
             let input = document.getElementById("dateInput").value;
@@ -836,6 +1145,18 @@
             const celebrateImg = document.getElementById("celebrateImg");
 
             if (input === correctDate) {
+                bgMusic.play()
+                    .then(() => {
+                        musicBtn.classList.add("show");   // 👈 show button now
+                        musicBtn.innerHTML = "🎵";
+                        musicBtn.classList.add("playing");
+                    })
+                    .catch(err => {
+                        console.log("Music play blocked:", err);
+                    });
+
+                celebrateImg.classList.add("show");
+
 
                 // Show celebration image
                 celebrateImg.classList.add("show");
@@ -944,7 +1265,7 @@
         }
 
 
-        const correctTempleDate = "15-12-24";
+        const correctTempleDate = "09-03-25";
         const templeInput = document.getElementById("templeInput");
         const templeBtn = document.getElementById("templeBtn");
         const templeError = document.getElementById("templeError");
@@ -979,22 +1300,24 @@
 
                 setTimeout(() => {
 
-                    memories.style.opacity = "1";
-                    memories.style.display = "flex";
-                    memories.style.justifyContent = "center";
-                    memories.style.alignItems = "center";
-                    memories.style.flexDirection = "column";
-                    memories.style.maxHeight = "2000px";
+                    const memories = document.getElementById("memories");
 
-                    memories.scrollIntoView({
-                        behavior: "smooth"
-                    });
+                    memories.classList.add("show");
 
-                    launchHearts();          // your existing hearts
+                    setTimeout(() => {
+                        memories.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+                    }, 300);
+
+                    launchHearts();
                     launchFlowerShower();
+
                     templeBtn.innerText = "Unlocked 💖";
 
                 }, 800);
+
 
             } else {
 
@@ -1097,6 +1420,37 @@
         }
 
     </script>
+    <script>
+        function getMonthsSince(startYear, startMonth, startDay) {
+
+            const startDate = new Date(startYear, startMonth, startDay);
+            const today = new Date();
+
+            let years = today.getFullYear() - startDate.getFullYear();
+            let months = today.getMonth() - startDate.getMonth();
+
+            let totalMonths = years * 12 + months;
+
+            if (today.getDate() < startDate.getDate()) {
+                totalMonths--;
+            }
+
+            return totalMonths < 0 ? 0 : totalMonths;
+        }
+
+        function updateMonthsTogether() {
+
+            const totalMonths = getMonthsSince(2024, 10, 1); // November 1, 2024
+
+            document.querySelectorAll(".monthsTogether").forEach(el => {
+                el.innerText = totalMonths;
+            });
+        }
+
+        updateMonthsTogether();
+
+
+    </script>
 
 
     <!-- Swiper JS -->
@@ -1127,6 +1481,91 @@
         });
 
     </script>
+    <button id="musicToggle" class="music-btn">🔇</button>
+
+    <script>
+        const bgMusic = new Audio("./assets/bgsong.mp3");
+        bgMusic.loop = true;
+        bgMusic.volume = 0.6;
+
+        const musicBtn = document.getElementById("musicToggle");
+
+        // Toggle Play / Pause
+        musicBtn.addEventListener("click", () => {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicBtn.innerHTML = "🎵";
+                musicBtn.classList.add("playing");
+            } else {
+                bgMusic.pause();
+                musicBtn.innerHTML = "🔇";
+                musicBtn.classList.remove("playing");
+            }
+        });
+    </script>
+    <script>
+        const themeDots = document.querySelectorAll(".theme-dot");
+
+        themeDots.forEach(dot => {
+            dot.addEventListener("click", () => {
+
+                // Remove active from all
+                themeDots.forEach(d => d.classList.remove("active"));
+                dot.classList.add("active");
+
+                const theme = dot.dataset.theme;
+
+                if (theme === "light") {
+                    document.documentElement.style.setProperty(
+                        "--bg-gradient",
+                        "linear-gradient(135deg, #ffd1e8, #ffb3d9, #ff99cc)"
+                    );
+                    document.documentElement.style.setProperty("--text-color", "#7a004f");
+                    document.documentElement.style.setProperty("--card-bg", "rgba(255,255,255,0.25)");
+                    document.documentElement.style.setProperty("--card-text", "#5a003f");
+                    document.documentElement.style.setProperty("--card-shadow", "rgba(0,0,0,0.15)");
+
+                }
+
+                if (theme === "medium") {
+                    document.documentElement.style.setProperty(
+                        "--bg-gradient",
+                        "linear-gradient(135deg, #ff9acb, #ff6fb5, #ff4fa3)"
+                    );
+                    document.documentElement.style.setProperty("--text-color", "#5a003f");
+                    document.documentElement.style.setProperty("--card-bg", "rgba(255,255,255,0.2)");
+                    document.documentElement.style.setProperty("--card-text", "#4a002f");
+                    document.documentElement.style.setProperty("--card-shadow", "rgba(0,0,0,0.25)");
+
+                }
+
+                if (theme === "dark") {
+                    document.documentElement.style.setProperty(
+                        "--bg-gradient",
+                        "linear-gradient(135deg, #3d0026, #5c0038, #8b004f)"
+                    );
+                    document.documentElement.style.setProperty("--text-color", "#ffd6eb");
+                    document.documentElement.style.setProperty("--card-bg", "rgba(255,255,255,0.1)");
+                    document.documentElement.style.setProperty("--card-text", "#ffd6eb");
+                    document.documentElement.style.setProperty("--card-shadow", "rgba(0,0,0,0.4)");
+
+                }
+            });
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            openEffect: 'zoom',
+            closeEffect: 'fade'
+        });
+
+    </script>
+
 </body>
 
 </html>
