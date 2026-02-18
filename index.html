@@ -4,18 +4,37 @@
 <head>
     <meta charset="utf-8" />
     <title>Only For Pii 💖</title>
+    <meta name="title" content="Only For Pii 💖">
+    <meta name="description"
+        content="From random talks... to being each other's peace. From laughter... to drama 😌 Every moment with you feels cinematic. And Pii... I would choose you in every lifetime.">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dipakpathak164.github.io/surprise/">
+    <meta property="og:title" content="Only For Pii 💖">
+    <meta property="og:description"
+        content="From random talks... to being each other's peace. From laughter... to drama 😌 Every moment with you feels cinematic. And Pii... I would choose you in every lifetime.">
+    <meta property="og:image" content="https://dipakpathak164.github.io/surprise/logo.png">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dipakpathak164.github.io/surprise/">
+    <meta property="twitter:title" content="Only For Pii 💖">
+    <meta property="twitter:description"
+        content="From random talks... to being each other's peace. From laughter... to drama 😌 Every moment with you feels cinematic. And Pii... I would choose you in every lifetime.">
+    <meta property="twitter:image" content="https://dipakpathak164.github.io/surprise/logo.png">
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
 
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap"
@@ -82,7 +101,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 25px;
         }
 
         h1,
@@ -849,15 +867,15 @@
     <section id="gate" class="position-relative">
         <img src="./assets/rightflower-removebg-preview.png" alt="flower" class="right_flower">
         <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
-        <h1>Private Love Portal <span class="glow-love">💖</span></h1>
-        <p>Only Pii can unlock this world...</p>
-        <p style="margin-top:15px;">
+        <h1 data-aos="fade-up">Private Love Portal <span class="glow-love">💖</span></h1>
+        <p data-aos="fade-up">Only Pii can unlock this world...</p>
+        <p style="margin-top:15px;" data-aos="fade-up">
             The day Dii’s life changed forever 🌸<br>
         </p>
         <span class="point-down">👇</span>
-        <input type="text" id="dateInput" placeholder="Select Date 🗓️">
+        <input type="text" id="dateInput" placeholder="Select Date 🗓️" data-aos="fade-up">
         <br>
-        <button id="unlockBtn" onclick="checkDate()">Unlock <span class="heart">💖</span></button>
+        <button data-aos="fade-up" id="unlockBtn" onclick="checkDate()">Unlock <span class="heart">💖</span></button>
         <p id="errorMsg" style="margin-top:15px;"></p>
         <img src="./assets/opening-removebg-preview.png" id="celebrateImg" class="celebrate-img" />
     </section>
@@ -865,7 +883,8 @@
     <!-- UNLOCK ANIMATION -->
     <div id="unlockScreen">
         <div class="bigHeart">💖</div>
-        <p style="margin-top:20px;color: #f2f2f2;">Welcome Pii...<span class="heart glow-love">💖</span></p>
+        <p style="margin-top:20px;color: #f2f2f2;" data-aos="fade-up">Welcome Pii...<span
+                class="heart glow-love">💖</span></p>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -904,9 +923,9 @@
         </section>
 
         <section id="story" class="position-relative">
-            <div class="love-card">
-                <h2>Our Filmy Journey <span class="glow-love">💞</span></h2>
-                <p style="max-width:420px;margin-top:20px;">
+            <div class="love-card" data-aos="fade-up">
+                <h2 data-aos="fade-up">Our Filmy Journey <span class="glow-love">💞</span></h2>
+                <p data-aos="fade-up" style="max-width:420px;margin-top:20px;">
                     From random talks...
                     to being each other's peace.
                     From laughter... to drama 😌
@@ -920,18 +939,18 @@
         <section class="position-relative">
             <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
             <img src="./assets/rightflower-removebg-preview.png" alt="flower" class="right_flower">
-            <h2>Open When... <span class="glow-love">💌</span></h2>
+            <h2 data-aos="fade-up">Open When... <span class="glow-love">💌</span></h2>
             <div class="letters-container">
 
-                <div class="card" onclick="openLetter(1, this)">
+                <div class="card" onclick="openLetter(1, this)" data-aos="fade-right">
                     💌 When you're sad
                 </div>
 
-                <div class="card" onclick="openLetter(2, this)">
+                <div class="card" onclick="openLetter(2, this)" data-aos="fade-left">
                     🌙 When you miss Dii
                 </div>
 
-                <div class="card" onclick="openLetter(3, this)">
+                <div class="card" onclick="openLetter(3, this)" data-aos="fade-right">
                     ✨ When you doubt yourself
                 </div>
 
@@ -945,26 +964,27 @@
         </section>
 
         <section class="position-relative">
+            <img src="./assets/rightflower-removebg-preview.png" alt="flower" class="right_flower">
             <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
-            <h2>One Last Thing <span class="glow-love">🌠</span></h2>
-            <p style="max-width:420px;margin-top:20px;">
+            <h2 data-aos="fade-down">One Last Thing <span class="glow-love">🌠</span></h2>
+            <p data-aos="fade-down" style="max-width:420px;margin-top:20px;">
                 <span class="monthsTogether"></span> months down...
                 A lifetime to go.
 
                 I love you endlessly, Pii 💖
                 — Dii
             </p>
-            <p style="margin-top:25px;">
+            <p data-aos="fade-down" style="margin-top:25px;">
                 Enter Our First Temple Visit Date 🛕
             </p>
-            <span class="point-down">👇</span>
+            <span data-aos="fade-down" class="point-down">👇</span>
 
 
-            <input type="text" id="templeInput" placeholder="Select Date 🗓️">
+            <input data-aos="fade-down" type="text" id="templeInput" placeholder="Select Date 🗓️">
 
             <br>
 
-            <button id="templeBtn" onclick="checkTemple()" disabled>
+            <button data-aos="fade-down" id="templeBtn" onclick="checkTemple()" disabled>
                 Unlock Our Memories 💖
             </button>
 
@@ -975,7 +995,7 @@
 
     </div>
     <div id="memories" class="memories-section">
-        <h2>Our Memories <span class="glow-love">🌸</span></h2>
+        <h2 data-aos="fade-down">Our Memories <span class="glow-love">🌸</span></h2>
 
         <!-- Swiper -->
         <div class="swiper mySwiper">
@@ -1564,6 +1584,13 @@
             closeEffect: 'fade'
         });
 
+    </script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,      // animation duration
+            easing: "ease-in-out",
+        });
     </script>
 
 </body>
