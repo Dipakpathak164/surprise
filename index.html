@@ -296,20 +296,19 @@
 
 <body>
     <audio autoplay loop>
-        <source src="music.mp3" type="audio/mpeg">
+        <source src="Agoli-Anubhabe-RUDRA-Zubeen-Garg-Bhaswati-Bharati-Ravi-Sarma-Nandinee-Diganta-Bharati.mp3" type="audio/mpeg">
     </audio>
     <!-- DATE GATE -->
     <section id="gate">
         <h1>Private Love Portal 💖</h1>
         <p>Only Pii can unlock this world...</p>
         <p style="margin-top:15px;">
-            Hint: The day Dii’s life changed forever 🌸<br>
-            Format: DD-MM-YYYY
+            The day Dii’s life changed forever 🌸<br>
         </p>
 
-        <input type="text" id="dateInput" placeholder="DD-MM-YYYY">
+        <input type="text" id="dateInput" placeholder="DD-MM-YY">
         <br>
-        <button onclick="checkDate()">Unlock</button>
+        <button onclick="checkDate()">Unlock 💖</button>
         <p id="errorMsg" style="margin-top:15px;"></p>
     </section>
 
@@ -431,7 +430,7 @@
         </div>
     </div>
     <script>
-        const correctDate = "01-11-2024";
+        const correctDate = "01-11-24";
 
         const memories = document.getElementById("memories");
 
@@ -471,7 +470,14 @@
         });
 
         flatpickr("#templeInput", {
-            dateFormat: "Y-m-d",
+            dateFormat: "d-m-y",
+            maxDate: "today",
+            disableMobile: true,
+            animate: true,
+        });
+
+        flatpickr("#dateInput", {
+            dateFormat: "d-m-y",
             maxDate: "today",
             disableMobile: true,
             animate: true,
