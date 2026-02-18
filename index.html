@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <!-- <title>Only For Pii 💖</title> -->
+    <title>Only For Pii 💖</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
@@ -31,9 +31,13 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #140016, #2c0033, #3d0047);
-            color: #f8e9f0;
+            background: linear-gradient(135deg, #ffd1e8, #ffb3d9, #ff99cc);
+            color: #7a004f;
             overflow-x: hidden;
+        }
+
+        section {
+            overflow: hidden;
         }
 
         .swiper {
@@ -76,36 +80,64 @@
             padding: 14px 28px;
             border: none;
             border-radius: 40px;
-            background: linear-gradient(135deg, #f7c6d9, #d48bb3);
-            color: #2a002e;
+            background: linear-gradient(135deg, #ff9acb, #ff6fb5);
+            color: white;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 20px;
-            transition: 0.3s;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
         }
+
 
         button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.4);
         }
 
         /* INPUT */
         input {
-            padding: 12px;
-            border-radius: 30px;
-            border: none;
-            margin-top: 20px;
-            width: 220px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
+            padding: 14px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            color: #5a003f;
+            font-size: 15px;
             outline: none;
+            transition: 0.3s ease;
+            text-align: center;
         }
+
+        input:focus {
+            border: 1px solid #d63384;
+            box-shadow: 0 0 12px rgba(214, 51, 132, 0.4);
+        }
+
+        .color-white {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
 
         /* HERO */
         .hero {
-            background: radial-gradient(circle at top, #4b0d57 0%, #140016 70%);
+            /* background: radial-gradient(circle at top, #4b0d57 0%, #140016 70%); */
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("assets/couple-beach-sunset.jpg");
+            background-position: center;
+            background-size: cover;
+        }
+
+        #story {
+            background-image: url("./assets/couple_kissing_on.jpg");
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        @media (max-width:767px) {
+            .hero {
+                background-position: -100px center;
+            }
         }
 
         .hero-content {
@@ -142,6 +174,7 @@
             height: 100%;
             object-fit: cover;
             transition: 0.5s ease;
+            border-radius: 50%;
         }
 
         .image-frame:hover img {
@@ -152,6 +185,7 @@
         .image-frame {
             position: relative;
             overflow: hidden;
+            min-height: 550px;
         }
 
         /* Gift centered */
@@ -191,7 +225,7 @@
         /* Inside image initially hidden above gift */
         .inside-image {
             position: absolute;
-            top: 40px;
+            top: 50px;
             /* adjust depending on gift height */
             left: 50%;
             transform: translate(-50%, -80px) scale(0.3);
@@ -206,22 +240,11 @@
             transform: translate(-50%, 0) scale(1);
             opacity: 1;
             animation: dropBounce 1s ease forwards;
+            width: 100%;
         }
 
-        @keyframes dropBounce {
-            0% {
-                transform: translate(-50%, -80px) scale(0.3);
-                opacity: 0;
-            }
-
-            60% {
-                transform: translate(-50%, 10px) scale(1.05);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translate(-50%, 0) scale(1);
-            }
+        .image-frame.open .inside-image img {
+            border-radius: 30px;
         }
 
 
@@ -238,14 +261,21 @@
             font-size: 24px;
             animation: fall linear forwards;
             z-index: 9999;
+            pointer-events: none;
         }
 
         @keyframes fall {
-            to {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
                 transform: translateY(110vh) rotate(360deg);
                 opacity: 0;
             }
         }
+
 
 
 
@@ -298,21 +328,99 @@
         }
 
         /* LETTER CARDS */
+        .letters-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             padding: 18px;
             border-radius: 20px;
             margin: 10px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             width: 280px;
+            text-align: center;
+            font-weight: 500;
+            color: #5a003f;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
+        /* Hover */
         .card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-6px) scale(1.03);
+            background: rgba(255, 255, 255, 0.25);
         }
+
+        /* Active card glow */
+        .card.active {
+            background: linear-gradient(135deg, #ffb3d9, #ff85c1);
+            color: white;
+            box-shadow: 0 12px 30px rgba(255, 105, 180, 0.4);
+        }
+
+        .letter-box {
+            max-width: 420px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            text-align: center;
+
+            opacity: 0;
+            transform: translateY(20px);
+
+            max-height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin-top: 0;
+
+            transition: all 0.5s ease;
+            visibility: hidden;
+        }
+
+        .letter-box.show {
+            opacity: 1;
+            transform: translateY(0);
+
+            max-height: 500px;
+            /* big enough for content */
+            padding: 25px;
+            margin-top: 30px;
+
+            visibility: visible;
+        }
+
+
+
+
+        #letterText {
+            line-height: 1.7;
+            color: #5a003f;
+        }
+
+        .letter-image {
+            margin-top: 15px;
+            max-width: 250px;
+            border-radius: 15px;
+            margin-left: auto;
+            margin-right: auto;
+
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px) scale(0.95);
+            transition: all 0.5s ease;
+        }
+
+        .letter-box.show .letter-image {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+
 
         /* ANIMATIONS */
         @keyframes pulse {
@@ -392,6 +500,151 @@
             opacity: 0.6;
             cursor: not-allowed;
         }
+
+        .position-relative {
+            position: relative;
+        }
+
+        .vibrant-bougainvillea {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            max-width: 100%;
+            animation: floatLeft 7s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .right_flower {
+            position: absolute;
+            right: -20px;
+            top: -30px;
+            max-width: 100%;
+            animation: floatRight 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatRight {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(-10px, 15px) rotate(3deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+
+        @keyframes floatLeft {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(10px, -15px) rotate(-3deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+
+
+        .love-card {
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 25px;
+
+            /* Glass effect */
+            background: rgba(59, 57, 57, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+
+            color: #5a003f;
+            /* deep plum for contrast */
+        }
+
+        .love-card h2 {
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #f2f2f2;
+            font-size: 50px;
+
+        }
+
+        .love-card p {
+            line-height: 1.7;
+            font-size: 18px;
+            color: #f2f2f2;
+
+        }
+
+        .celebrate-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            width: 220px;
+            opacity: 0;
+            transition: all 0.8s ease;
+            pointer-events: none;
+        }
+
+        /* When visible */
+        .celebrate-img.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Sad emoji bigger */
+        .sad {
+            font-size: 22px;
+        }
+
+        .special-flower {
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.3);
+            z-index: 10000;
+            pointer-events: none;
+            animation: specialZoom 4s ease forwards;
+        }
+
+        @keyframes specialZoom {
+            0% {
+                transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            60% {
+                transform: translate(-50%, -50%) scale(1.8) rotate(180deg);
+                opacity: 1;
+            }
+
+            80% {
+                transform: translate(-50%, -50%) scale(1.8);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        .memories-section {
+            height: 100vh;
+        }
     </style>
 </head>
 
@@ -401,33 +654,37 @@
             type="audio/mpeg">
     </audio>
     <!-- DATE GATE -->
-    <section id="gate">
+    <section id="gate" class="position-relative">
+        <img src="./assets/rightflower-removebg-preview.png" alt="flower" class="right_flower">
+        <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
         <h1>Private Love Portal 💖</h1>
         <p>Only Pii can unlock this world...</p>
         <p style="margin-top:15px;">
             The day Dii’s life changed forever 🌸<br>
         </p>
-
-        <input type="text" id="dateInput" placeholder="DD-MM-YY">
+        <span style="font-size: 40px;">👇</span>
+        <input type="text" id="dateInput" placeholder="Select Date 🗓️">
         <br>
-        <button onclick="checkDate()">Unlock 💖</button>
+        <button id="unlockBtn" onclick="checkDate()">Unlock <span class="heart">💖</span></button>
         <p id="errorMsg" style="margin-top:15px;"></p>
+        <img src="./assets/opening-removebg-preview.png" id="celebrateImg" class="celebrate-img" />
     </section>
 
     <!-- UNLOCK ANIMATION -->
     <div id="unlockScreen">
         <div class="bigHeart">💖</div>
-        <p style="margin-top:20px;">Welcome Pii...</p>
+        <p style="margin-top:20px;color: #f2f2f2;">Welcome Pii...<span class="heart">💖</span></p>
     </div>
 
     <!-- MAIN CONTENT -->
-    <div id="mainContent" class="hidden">
+    <div id="mainContent">
+        <!-- <div id="mainContent" class="hidden"> -->
 
         <!-- HERO -->
         <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title">Pii 💕</h1>
-                <p class="hero-text">
+            <div class="hero-content color-white">
+                <h1 class="hero-title color-white">Pii 💕</h1>
+                <p class="hero-text color-white">
                     01 November 2024... <br>
                     The day my ordinary life turned extraordinary. <br><br>
                     14 months later...
@@ -448,39 +705,56 @@
 
                 </div>
 
-
-
-
                 <button onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">
-                    Continue Our Story
+                    Continue Our Story <span class="heart">💖</span>
                 </button>
 
             </div>
         </section>
 
-        <section id="story">
-            <h2>Our Filmy Journey 💞</h2>
-            <p style="max-width:420px;margin-top:20px;">
-                From random talks...
-                to being each other's peace.
-                From laughter... to drama 😌
-                Every moment with you feels cinematic.
+        <section id="story" class="position-relative">
+            <div class="love-card">
+                <h2>Our Filmy Journey 💞</h2>
+                <p style="max-width:420px;margin-top:20px;">
+                    From random talks...
+                    to being each other's peace.
+                    From laughter... to drama 😌
+                    Every moment with you feels cinematic.
 
-                And Pii...
-                I would choose you in every lifetime.
-            </p>
-        </section>
-        <section>
-            <h2>Open When... 💌</h2>
-            <div style="display:flex;flex-direction:column;align-items:center;">
-                <div class="card" onclick="openLetter(1)">When you're sad</div>
-                <div class="card" onclick="openLetter(2)">When you miss Dii</div>
-                <div class="card" onclick="openLetter(3)">When you doubt yourself</div>
+                    And Pii...
+                    I would choose you in every lifetime.
+                </p>
             </div>
-            <p id="letterText" style="margin-top:25px;max-width:420px;"></p>
+        </section>
+        <section class="position-relative">
+            <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
+            <img src="./assets/rightflower-removebg-preview.png" alt="flower" class="right_flower">
+            <h2>Open When... 💌</h2>
+            <div class="letters-container">
+
+                <div class="card" onclick="openLetter(1, this)">
+                    💌 When you're sad
+                </div>
+
+                <div class="card" onclick="openLetter(2, this)">
+                    🌙 When you miss Dii
+                </div>
+
+                <div class="card" onclick="openLetter(3, this)">
+                    ✨ When you doubt yourself
+                </div>
+
+            </div>
+
+            <div class="letter-box">
+                <p id="letterText"></p>
+                <img id="letterImage" class="letter-image">
+            </div>
+
         </section>
 
-        <section>
+        <section class="position-relative">
+            <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
             <h2>One Last Thing 🌠</h2>
             <p style="max-width:420px;margin-top:20px;">
                 14 months down...
@@ -492,8 +766,9 @@
             <p style="margin-top:25px;">
                 Enter Our First Temple Visit Date 🛕
             </p>
+            <span style="font-size: 40px;">👇</span>
 
-            <input type="text" id="templeInput" placeholder="Select Date">
+            <input type="text" id="templeInput" placeholder="Select Date 🗓️">
 
             <br>
 
@@ -556,27 +831,120 @@
 
         function checkDate() {
             let input = document.getElementById("dateInput").value;
+            const heart = document.querySelector(".heart");
+            const btn = document.getElementById("unlockBtn");
+            const celebrateImg = document.getElementById("celebrateImg");
 
             if (input === correctDate) {
 
-                document.getElementById("gate").style.display = "none";
+                // Show celebration image
+                celebrateImg.classList.add("show");
 
-                let unlock = document.getElementById("unlockScreen");
-                unlock.classList.add("show");
-
+                // Hide after 2 seconds
                 setTimeout(() => {
-                    unlock.style.display = "none";
-                    document.getElementById("mainContent").classList.remove("hidden");
-                }, 2500);
+                    celebrateImg.classList.remove("show");
+
+                    document.getElementById("gate").style.display = "none";
+
+                    let unlock = document.getElementById("unlockScreen");
+                    unlock.classList.add("show");
+
+                    setTimeout(() => {
+                        unlock.style.display = "none";
+                        document.getElementById("mainContent").classList.remove("hidden");
+                    }, 2500);
+
+                }, 2000);
 
             } else {
-                document.getElementById("errorMsg").innerText =
-                    "That’s not our magical day Pii 😌";
+
+                // Replace heart with sad emoji
+                heart.innerHTML = "😢";
+                heart.classList.add("sad");
+                btn.classList.add("shake");
+                setTimeout(() => btn.classList.remove("shake"), 400);
+
+                const error = document.getElementById("errorMsg");
+                error.innerText = "That’s not our magical day Pii 😌";
+                error.style.color = "#ff4d4d"; // Add a clear color like red/pink
+                error.style.display = "block";
+                console.log("Error triggered");
+
+
+
+                // Optional: restore heart after 2 sec
+                setTimeout(() => {
+                    heart.innerHTML = "💖";
+                    heart.classList.remove("sad");
+                }, 2000);
             }
         }
 
 
-        const correctTempleDate = "2024-12-15"; // YYYY-MM-DD format
+        function launchFlowerShower(options = {}) {
+
+            const {
+                count = 40,
+                includeSpecial = true
+            } = options;
+
+            const flowers = ["🌸", "🌺", "🌷", "🌹", "💮"];
+
+            const flowerImages = [
+                "./assets/randflower1-removebg-preview.png",
+                "./assets/randflower2-removebg-preview.png"
+            ];
+
+            // 🌸 Normal falling flowers
+            for (let i = 0; i < count; i++) {
+
+                let flower = document.createElement("div");
+                flower.classList.add("flower");
+
+                if (Math.random() > 0.5) {
+                    let size = 30 + Math.random() * 90;
+                    flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+                    flower.style.fontSize = size + "px";
+                    flower.style.animationDuration = (size > 80 ? 6 : 4) + "s";
+                } else {
+                    let img = document.createElement("img");
+                    img.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
+                    img.style.width = (40 + Math.random() * 60) + "px";
+                    flower.appendChild(img);
+                    flower.style.animationDuration = "5s";
+                }
+
+                flower.style.left = Math.random() * 100 + "vw";
+                flower.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                document.body.appendChild(flower);
+
+                setTimeout(() => flower.remove(), 6000);
+            }
+
+            // 🌺 Special cinematic flower
+            if (includeSpecial) {
+                let special = document.createElement("div");
+                special.classList.add("special-flower");
+
+                if (Math.random() > 0.5) {
+                    special.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+                    special.style.fontSize = "120px";
+                } else {
+                    let img = document.createElement("img");
+                    img.src = flowerImages[Math.floor(Math.random() * flowerImages.length)];
+                    img.style.width = "150px";
+                    special.appendChild(img);
+                }
+
+                document.body.appendChild(special);
+
+                setTimeout(() => special.remove(), 4000);
+            }
+        }
+
+
+        const correctTempleDate = "15-12-24";
         const templeInput = document.getElementById("templeInput");
         const templeBtn = document.getElementById("templeBtn");
         const templeError = document.getElementById("templeError");
@@ -612,14 +980,18 @@
                 setTimeout(() => {
 
                     memories.style.opacity = "1";
+                    memories.style.display = "flex";
+                    memories.style.justifyContent = "center";
+                    memories.style.alignItems = "center";
+                    memories.style.flexDirection = "column";
                     memories.style.maxHeight = "2000px";
 
                     memories.scrollIntoView({
                         behavior: "smooth"
                     });
 
-                    launchHearts();
-
+                    launchHearts();          // your existing hearts
+                    launchFlowerShower();
                     templeBtn.innerText = "Unlocked 💖";
 
                 }, 800);
@@ -639,15 +1011,54 @@
         }
 
 
-        function openLetter(num) {
+
+        function openLetter(num, element) {
+
             const messages = [
-                "",
-                "Pii… even on your worst days, you are the brightest part of my world.",
-                "When you miss Dii, just remember my heart beats with yours.",
-                "You are stronger and more magical than you think. Never doubt that."
+                {},
+                {
+                    text: "Pii… even on your worst days, you are the brightest part of my world.",
+                    image: "./assets/openletter1.jpeg"
+                },
+                {
+                    text: "When you miss Dii, just remember my heart beats with yours.",
+                    image: "./assets/openletter2.jpeg"
+                },
+                {
+                    text: "You are stronger and more magical than you think. Never doubt that.",
+                    image: "./assets/openletter3.jpeg"
+                }
             ];
-            document.getElementById("letterText").innerText = messages[num];
+
+            const letterText = document.getElementById("letterText");
+            const letterImage = document.getElementById("letterImage");
+            const letterBox = document.querySelector(".letter-box");
+
+            if (!messages[num]) return;
+
+            // Remove active from all cards
+            document.querySelectorAll(".card").forEach(card => {
+                card.classList.remove("active");
+            });
+
+            // Activate clicked card
+            element.classList.add("active");
+
+            // Update text
+            letterText.innerText = messages[num].text;
+
+            // Update image if exists
+            if (messages[num].image) {
+                letterImage.src = messages[num].image;
+                letterImage.style.display = "block";
+            } else {
+                letterImage.style.display = "none";
+            }
+
+            // Animate reveal
+            letterBox.classList.add("show");
         }
+
 
         function launchHearts() {
 
@@ -674,30 +1085,17 @@
     </script>
     <script>
         function openGift() {
+
             const frame = document.querySelector(".image-frame");
             frame.classList.add("open");
 
-            // Flower shower
-            for (let i = 0; i < 30; i++) {
-                let flower = document.createElement("div");
-                flower.classList.add("flower");
-                flower.innerHTML = "🌸";
+            launchFlowerShower();   // 🌸 reusable call
 
-                flower.style.left = Math.random() * 100 + "vw";
-                flower.style.animationDuration = (3 + Math.random() * 2) + "s";
-
-                document.body.appendChild(flower);
-
-                setTimeout(() => {
-                    flower.remove();
-                }, 5000);
-            }
-
-            // Completely remove gift after animation
             setTimeout(() => {
                 document.querySelector(".gift-container").style.display = "none";
             }, 800);
         }
+
     </script>
 
 
