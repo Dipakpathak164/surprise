@@ -85,21 +85,28 @@
         }
 
         .swiper {
-            width: 100%;
-            padding-top: 50px;
-            padding-bottom: 50px;
+            width: 300px;
+            height: 300px;
+            margin: 40px auto;
+            /* center horizontally */
+            position: relative;
+            /* normal document flow */
+            overflow: visible !important;
         }
 
         .swiper-slide {
             background-position: center;
             background-size: cover;
-            width: 300px;
-            height: 300px;
+            /* Optional: Add a slight rounded corner for a cleaner look */
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .swiper-slide img {
             display: block;
             width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* GENERAL SECTIONS */
@@ -750,11 +757,6 @@
             }
         }
 
-        .swiper-slide-shadow-left,
-        .swiper-slide-shadow-right {
-            background-image: 100%;
-        }
-
         .point-down {
             display: inline-block;
             font-size: 40px;
@@ -1207,7 +1209,6 @@
                 </div>
 
             </div>
-            <div class="swiper-pagination"></div>
         </div>
     </div>
     <script>
@@ -1221,18 +1222,29 @@
             sound.preload = "auto";
             sound.volume = 0.8;
         });
-        function playSound(type) {
+        function playSound(type, duration = 1200) {
 
             const sound = soundEffects[type];
-
             if (!sound) return;
 
-            sound.currentTime = 0;   // reset if replayed quickly
+            // Clear any previous stop timer
+            if (sound._stopTimer) {
+                clearTimeout(sound._stopTimer);
+            }
+
+            sound.currentTime = 0;
 
             sound.play().catch(err => {
                 console.log("Sound blocked:", err);
             });
+
+            // Stop after duration
+            sound._stopTimer = setTimeout(() => {
+                sound.pause();
+                sound.currentTime = 0;
+            }, duration);
         }
+
 
     </script>
     <script>
@@ -1288,7 +1300,7 @@
             } else {
 
                 // Replace heart with sad emoji
-                playSound("fail");
+                playSound("fail", 1000);
                 heart.innerHTML = "😢";
                 heart.classList.add("sad");
                 btn.classList.add("shake");
@@ -1430,7 +1442,7 @@
 
             } else {
 
-                playSound("fail");
+                playSound("fail", 1000);
                 templeError.innerText = "Hmm… try remembering that day again 😌";
                 templeError.style.opacity = "1";
 
@@ -1570,26 +1582,21 @@
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper(".mySwiper", {
-            effect: "coverflow",
+            effect: "cube",
             grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: "auto",
-            loop: true, // IMPORTANT for smooth continuous autoplay
+            loop: true,
             autoplay: {
-                delay: 2500, // time between slides (ms)
-                disableOnInteraction: false, // keeps autoplay running after swipe
+                delay: 2500,
+                disableOnInteraction: false,
             },
-            coverflowEffect: {
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: true,
-            },
-            pagination: {
-                el: ".swiper-pagination",
+            cubeEffect: {
+                shadow: true,               // Enable main shadow
+                slideShadows: true,          // Shadows on the side faces
+                shadowOffset: 25,           // Pushes shadow further down
+                shadowScale: 0.94,          // Adjusts shadow width
             },
         });
+
 
     </script>
     <button id="musicToggle" class="music-btn">🔇</button>
@@ -1672,8 +1679,13 @@
             touchNavigation: true,
             loop: true,
             openEffect: 'zoom',
-            closeEffect: 'fade'
+            closeEffect: 'fade',
+
+            autofocusVideos: false,
+            focusAtStart: false,
+            restoreFocus: false   // 🔥 THIS IS THE REAL FIX
         });
+
 
     </script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
