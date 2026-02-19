@@ -551,6 +551,13 @@
             }
         }
 
+        #templeGate {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
@@ -921,6 +928,27 @@
             overflow: visible !important;
             height: auto !important;
         }
+
+        .bottom_flower {
+            bottom: 0;
+            top: unset !important;
+            margin-top: 0;
+            animation: floatBottom 6s ease-in-out infinite;
+        }
+
+        @keyframes floatBottom {
+            0% {
+                margin-bottom: 0;
+            }
+
+            50% {
+                margin-bottom: 15px;
+            }
+
+            100% {
+                margin-bottom: 0;
+            }
+        }
     </style>
 </head>
 
@@ -1042,28 +1070,28 @@
                 I love you endlessly, Pii 💖
                 — Dii
             </p>
-            <p data-aos="fade-down" style="margin-top:25px;">
-                Enter Our First Temple Visit Date 🛕
-            </p>
-            <span data-aos="fade-down" class="point-down">👇</span>
+            <div id="templeGate">
+                <p data-aos="fade-down" style="margin-top:25px;">
+                    Enter Our First Temple Visit Date 🛕
+                </p>
+                <span data-aos="fade-down" class="point-down">👇</span>
 
+                <input data-aos="fade-down" type="text" id="templeInput" placeholder="Select Date 🗓️">
 
-            <input data-aos="fade-down" type="text" id="templeInput" placeholder="Select Date 🗓️">
+                <br>
 
-            <br>
-
-            <button data-aos="fade-down" id="templeBtn" onclick="checkTemple()" disabled>
-                Unlock Our Memories 💖
-            </button>
+                <button data-aos="fade-down" id="templeBtn" onclick="checkTemple()" disabled>
+                    Unlock Our Memories 💖
+                </button>
+            </div>
 
             <p id="templeError" style="margin-top:10px; opacity:0; transition:0.3s;"></p>
-
 
         </section>
 
     </div>
     <div id="memories" class="memories-section position-relative">
-        <img src="./assets/topflower-removebg-preview.png" alt="flower" class="right_flower top_flower">
+        <img src="./assets/topflower-removebg-preview.png" alt="flower" class="right_flower bottom_flower">
         <h2 data-aos="fade-down">Our Memories <span class="glow-love">🌸</span></h2>
 
         <!-- Swiper -->
@@ -1415,19 +1443,28 @@
 
 
         function checkTemple() {
+            const templeInput = document.getElementById("templeInput");
+            const templeError = document.getElementById("templeError");
+            const templeBtn = document.getElementById("templeBtn");
+            const templeGate = document.getElementById("templeGate");
+            const correctTempleDate = "09-03-25"; // Replace with your actual date
 
             if (templeInput.value === correctTempleDate) {
-
                 templeError.style.opacity = "0";
 
                 // Small cinematic delay
                 templeBtn.innerText = "Unlocking...";
                 templeBtn.disabled = true;
 
-                setTimeout(() => {
+                // Hide the entry fields immediately so the user knows it's correct
+                templeGate.style.display = "none";
 
+                setTimeout(() => {
                     const memories = document.getElementById("memories");
-                    playSound("success");
+
+                    // Check if playSound exists to prevent errors
+                    if (typeof playSound === "function") playSound("success");
+
                     memories.classList.add("show");
 
                     setTimeout(() => {
@@ -1437,23 +1474,21 @@
                         });
                     }, 300);
 
-                    launchHearts();
-                    launchFlowerShower();
+                    // Trigger animations if functions exist
+                    if (typeof launchHearts === "function") launchHearts();
+                    if (typeof launchFlowerShower === "function") launchFlowerShower();
 
                     templeBtn.innerText = "Unlocked 💖";
-
                 }, 800);
 
-
             } else {
+                if (typeof playSound === "function") playSound("fail", 1000);
 
-                playSound("fail", 1000);
                 templeError.innerText = "Hmm… try remembering that day again 😌";
                 templeError.style.opacity = "1";
 
                 // Shake effect
                 templeInput.classList.add("shake");
-
                 setTimeout(() => {
                     templeInput.classList.remove("shake");
                 }, 400);
