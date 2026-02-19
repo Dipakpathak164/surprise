@@ -893,6 +893,73 @@
             padding-top: 232px;
         }
 
+        .glightbox-open {
+            overflow: visible !important;
+            height: auto !important;
+        }
+
+        .bottom_flower {
+            bottom: 0;
+            top: unset !important;
+            margin-top: 0;
+            animation: floatBottom 6s ease-in-out infinite;
+        }
+
+        @keyframes floatBottom {
+            0% {
+                margin-bottom: 0;
+            }
+
+            50% {
+                margin-bottom: 15px;
+            }
+
+            100% {
+                margin-bottom: 0;
+            }
+        }
+
+        /* Floating Scroll to Top Button */
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 90px;
+            /* Placed above your music button */
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: var(--text-color);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            transition: all 0.4s ease;
+
+            /* Initially hidden */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        #scrollTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #scrollTopBtn:hover {
+            background: var(--bg-gradient);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(122, 0, 79, 0.2);
+        }
+
         @media (max-width:767px) {
             .hero {
                 background-position: -100px center;
@@ -921,32 +988,6 @@
 
             .pt-text {
                 padding-top: 0;
-            }
-        }
-
-        .glightbox-open {
-            overflow: visible !important;
-            height: auto !important;
-        }
-
-        .bottom_flower {
-            bottom: 0;
-            top: unset !important;
-            margin-top: 0;
-            animation: floatBottom 6s ease-in-out infinite;
-        }
-
-        @keyframes floatBottom {
-            0% {
-                margin-bottom: 0;
-            }
-
-            50% {
-                margin-bottom: 15px;
-            }
-
-            100% {
-                margin-bottom: 0;
             }
         }
     </style>
@@ -1244,6 +1285,7 @@
             </div>
         </div>
     </div>
+    <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
     <script>
         const soundEffects = {
             success: new Audio("./assets/success.mp3"),
@@ -1733,6 +1775,26 @@
             duration: 1000,      // animation duration
             easing: "ease-in-out",
         });
+    </script>
+    <script>
+        // Function to handle the Scroll to Top logic
+        window.onscroll = function () {
+            const scrollBtn = document.getElementById("scrollTopBtn");
+
+            // Show button when user scrolls down 400px
+            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                scrollBtn.classList.add("show");
+            } else {
+                scrollBtn.classList.remove("show");
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
     </script>
 
 </body>
