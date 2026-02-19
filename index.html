@@ -65,7 +65,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--bg-gradient);
+            /* background: var(--bg-gradient); */
             color: var(--text-color);
             overflow-x: hidden;
             transition: background 0.6s ease, color 0.6s ease;
@@ -73,6 +73,15 @@
 
         section {
             overflow: hidden;
+            transition: background 0.6s ease, color 0.6s ease;
+            padding: 50px 0;
+        }
+
+        #gate,
+        #openSurprise,
+        #beforeMemory,
+        #memories {
+            background: var(--bg-gradient);
         }
 
         .swiper {
@@ -170,11 +179,6 @@
             background-attachment: fixed;
         }
 
-        @media (max-width:767px) {
-            .hero {
-                background-position: -100px center;
-            }
-        }
 
         .hero-content {
             max-width: 420px;
@@ -567,6 +571,27 @@
             pointer-events: none;
         }
 
+        .top_flower {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) !important;
+            animation: floatTop 6s ease-in-out infinite;
+        }
+
+        @keyframes floatTop {
+            0% {
+                margin-top: 0;
+            }
+
+            50% {
+                margin-top: 15px;
+            }
+
+            100% {
+                margin-top: 0;
+            }
+        }
+
         @keyframes floatRight {
             0% {
                 transform: translate(0, 0) rotate(0deg);
@@ -703,6 +728,7 @@
             flex-direction: column;
             padding-top: 50px;
             padding-bottom: 50px;
+            min-height: 100vh;
         }
 
         .glow-love {
@@ -853,6 +879,41 @@
             transform: scale(1.4);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
+
+        .pt-text {
+            padding-top: 232px;
+        }
+
+        @media (max-width:767px) {
+            .hero {
+                background-position: -100px center;
+            }
+
+            .top_flower {
+                bottom: 0;
+                top: unset !important;
+                margin-top: 0;
+                animation: floatBottom 6s ease-in-out infinite;
+            }
+
+            @keyframes floatBottom {
+                0% {
+                    margin-bottom: 0;
+                }
+
+                50% {
+                    margin-bottom: 15px;
+                }
+
+                100% {
+                    margin-bottom: 0;
+                }
+            }
+
+            .pt-text {
+                padding-top: 0;
+            }
+        }
     </style>
 </head>
 
@@ -936,7 +997,7 @@
                 </p>
             </div>
         </section>
-        <section class="position-relative">
+        <section class="position-relative" id="openSurprise">
             <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
             <img src="./assets/rightflower-removebg-preview.png" alt="flower" class="right_flower">
             <h2 data-aos="fade-up">Open When... <span class="glow-love">💌</span></h2>
@@ -963,10 +1024,10 @@
 
         </section>
 
-        <section class="position-relative">
-            <img src="./assets/rightflower-removebg-preview.png" alt="flower" class="right_flower">
-            <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea">
-            <h2 data-aos="fade-down">One Last Thing <span class="glow-love">🌠</span></h2>
+        <section class="position-relative" id="beforeMemory">
+            <img src="./assets/topflower-removebg-preview.png" alt="flower" class="right_flower top_flower">
+            <!-- <img src="./assets/flower1-removebg-preview.png" alt="vibrant-bougainvillea" class="vibrant-bougainvillea"> -->
+            <h2 data-aos="fade-down" class="pt-text">One Last Thing <span class="glow-love">🌠</span></h2>
             <p data-aos="fade-down" style="max-width:420px;margin-top:20px;">
                 <span class="monthsTogether"></span> months down...
                 A lifetime to go.
@@ -994,7 +1055,8 @@
         </section>
 
     </div>
-    <div id="memories" class="memories-section">
+    <div id="memories" class="memories-section position-relative">
+        <img src="./assets/topflower-removebg-preview.png" alt="flower" class="right_flower top_flower">
         <h2 data-aos="fade-down">Our Memories <span class="glow-love">🌸</span></h2>
 
         <!-- Swiper -->
@@ -1149,6 +1211,31 @@
         </div>
     </div>
     <script>
+        const soundEffects = {
+            success: new Audio("./assets/success.mp3"),
+            fail: new Audio("./assets/failure.mp3")
+        };
+
+        // Optional settings
+        Object.values(soundEffects).forEach(sound => {
+            sound.preload = "auto";
+            sound.volume = 0.8;
+        });
+        function playSound(type) {
+
+            const sound = soundEffects[type];
+
+            if (!sound) return;
+
+            sound.currentTime = 0;   // reset if replayed quickly
+
+            sound.play().catch(err => {
+                console.log("Sound blocked:", err);
+            });
+        }
+
+    </script>
+    <script>
         const correctDate = "01-11-24";
 
         const memories = document.getElementById("memories");
@@ -1165,6 +1252,7 @@
             const celebrateImg = document.getElementById("celebrateImg");
 
             if (input === correctDate) {
+                playSound("success");
                 bgMusic.play()
                     .then(() => {
                         musicBtn.classList.add("show");   // 👈 show button now
@@ -1200,6 +1288,7 @@
             } else {
 
                 // Replace heart with sad emoji
+                playSound("fail");
                 heart.innerHTML = "😢";
                 heart.classList.add("sad");
                 btn.classList.add("shake");
@@ -1321,7 +1410,7 @@
                 setTimeout(() => {
 
                     const memories = document.getElementById("memories");
-
+                    playSound("success");
                     memories.classList.add("show");
 
                     setTimeout(() => {
@@ -1341,6 +1430,7 @@
 
             } else {
 
+                playSound("fail");
                 templeError.innerText = "Hmm… try remembering that day again 😌";
                 templeError.style.opacity = "1";
 
@@ -1433,6 +1523,7 @@
             frame.classList.add("open");
 
             launchFlowerShower();   // 🌸 reusable call
+            playSound("success");
 
             setTimeout(() => {
                 document.querySelector(".gift-container").style.display = "none";
